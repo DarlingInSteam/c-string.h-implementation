@@ -15,22 +15,22 @@ $(EXECUTABLE): $(OBJECTS)
 rebuild: clean all
 
 strlen_tests: STRLEN
-	$(CC) $(OBJECTS) -o ../Build/Quest_1
+	$(CC) $(OBJECTS) -o ../build/Quest_1
 
 strcmp_tests: STRCMP
-	$(CC) $(OBJECTS) -o ../Build/Quest_2
+	$(CC) $(OBJECTS) -o ../build/Quest_2
 
 strcpy_tests: STRCPY
-	$(CC) $(OBJECTS) -o ../Build/Quest_3
+	$(CC) $(OBJECTS) -o ../build/Quest_3
 
 strcat_tests: STRCAT
-	$(CC) $(OBJECTS) -o ../Build/Quest_4
+	$(CC) $(OBJECTS) -o ../build/Quest_4
 
 strchr_test: STRCHR
-	$(CC) $(OBJECTS) -o ../Build/Quest_5
+	$(CC) $(OBJECTS) -o ../build/Quest_5
 
 strstr_test: STRSTR
-	$(CC) $(OBJECTS) -o ../Build/Quest_6
+	$(CC) $(OBJECTS) -o ../build/Quest_6
 
 STRLEN:
 	$(CC) -DSTRLEN $(CFLAGS) -c s21_string_test.c -o s21_string_test.o
@@ -63,3 +63,4 @@ clean:
 	-rm $(OBJECTS)
 	-rm $(EXECUTABLE)
 	-rm $(QUESTS)
+	-rm ../build/Quest*
