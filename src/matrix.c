@@ -1,4 +1,5 @@
 #include "matrix.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,7 +13,7 @@ void output_matrix(int **matrix, int height, int width) {
             }
         }
 
-        if (i - 1 > -1 ) printf("\n");
+        if (i - 1 > -1) printf("\n");
     }
 }
 

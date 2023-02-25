@@ -1,4 +1,5 @@
 #include "stack.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,8 +15,7 @@ struct stack *init(double data) {
 struct stack *push(struct stack *root, double data) {
     struct stack *new = init(data);
 
-    if (root)
-        new->next = root;
+    if (root) new->next = root;
 
     return new;
 }

@@ -15,8 +15,7 @@ struct queue *push_queue(struct queue *root, int data) {
     struct queue *current = root;
 
     if (root) {
-        while (current->next != NULL)
-            current = current->next;
+        while (current->next != NULL) current = current->next;
 
         current->next = new;
     } else {

@@ -1,16 +1,17 @@
 #include "tokens.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 int *read_tokens(char *input, int *amount_tokens) {
-    int len = (int) strlen(input), flag = 0;
+    int len = (int)strlen(input), flag = 0;
     int *tokens = NULL, *tmp = NULL;
 
     *amount_tokens = 0;
 
-    for (int i = 0; i < len; ) {
-         if (len - i >= 1 && is_operator_c(input[i])) {
+    for (int i = 0; i < len;) {
+        if (len - i >= 1 && is_operator_c(input[i])) {
             tmp = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
             if (tmp != NULL) {
                 tokens = tmp;

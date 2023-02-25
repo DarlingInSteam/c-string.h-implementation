@@ -9,6 +9,6 @@ struct queue {
 };
 
 struct queue *push_queue(struct queue *root, int data);
-void free_queue(struct queue* root);
+void free_queue(struct queue *root);
 
-#endif 
+#endif

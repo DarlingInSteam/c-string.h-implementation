@@ -25,4 +25,4 @@ tokens.o : tokens.c
 	$(CC) $(CFLAGS) -c tokens.c -o tokens.o
 
 clean :
-	rm -f ./../build/Quest_*
+	rm ../build/graph

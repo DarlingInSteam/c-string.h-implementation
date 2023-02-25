@@ -1,11 +1,12 @@
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
+
+#include "matrix.h"
+#include "queue.h"
 #include "shunting_yard.h"
 #include "stack.h"
-#include "queue.h"
-#include "matrix.h"
 
 #define HEIGHT 25
 #define WIDTH 80
@@ -18,7 +19,7 @@ int main() {
     char *input = readline_();
     struct queue *result = NULL;
 
-    result = shunting_yard(input, &flag); 
+    result = shunting_yard(input, &flag);
     if (flag) {
         printf("n/a\n");
     } else {
@@ -36,8 +37,7 @@ int main() {
 int **function2matrix(struct queue *result) {
     int **matrix = calloc(HEIGHT, sizeof(int *));
 
-    for (int i = 0; i < HEIGHT; i++)
-        matrix[i] = calloc(WIDTH, sizeof(int));
+    for (int i = 0; i < HEIGHT; i++) matrix[i] = calloc(WIDTH, sizeof(int));
 
     for (int i = 0; i < WIDTH; i++) {
         int flag = 0;
@@ -48,7 +48,7 @@ int **function2matrix(struct queue *result) {
             if (current->data > 0) {
                 temp = push(temp, current->data);
             } else {
-                switch ((int) current->data) {
+                switch ((int)current->data) {
                     double x2;
                     double x1;
                     double x;
@@ -135,14 +135,13 @@ int **function2matrix(struct queue *result) {
                         break;
                 }
             }
-            if (flag)
-                break;
+            if (flag) break;
             current = current->next;
         }
 
         if (!flag) {
-            if (0 <= (int) round(temp->data * 12.0) + 12 && (int) round(temp->data * 12.0) + 12 <= 24)
-                matrix[(int) round(temp->data * 12.0) + 12][i] = 1;
+            if (0 <= (int)round(temp->data * 12.0) + 12 && (int)round(temp->data * 12.0) + 12 <= 24)
+                matrix[(int)round(temp->data * 12.0) + 12][i] = 1;
         }
 
         free_stack(temp);

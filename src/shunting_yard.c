@@ -1,9 +1,11 @@
 #include "shunting_yard.h"
-#include "tokens.h"
+
+#include <string.h>
+
+#include "matrix.h"
 #include "queue.h"
 #include "stack.h"
-#include "matrix.h"
-#include <string.h>
+#include "tokens.h"
 
 char *readline_() {
     char buf[81] = {0};
@@ -18,7 +20,7 @@ char *readline_() {
                 return NULL;
             }
         } else if (n > 0) {
-            int chunk_len = (int) strlen(buf);
+            int chunk_len = (int)strlen(buf);
             int str_len = len + chunk_len;
             tmp = realloc(res, str_len + 1);
             if (tmp == NULL) {
@@ -39,7 +41,6 @@ char *readline_() {
     }
     return res;
 }
-
 
 int priority(int token) {
     int ans;
@@ -80,7 +81,7 @@ int associativity(int token) {
 }
 
 struct queue *shunting_yard(char *input, int *flag) {
-    struct queue * result = NULL;
+    struct queue *result = NULL;
     int amount_tokens = 0;
     int *tokens = read_tokens(input, &amount_tokens);
     struct stack *temp_stack = NULL;
@@ -92,19 +93,20 @@ struct queue *shunting_yard(char *input, int *flag) {
         int i = 0;
         while (i < amount_tokens) {
             if (tokens[i] > -1 || tokens[i] == -14) {
-                result= push_queue(result, tokens[i]);
+                result = push_queue(result, tokens[i]);
             } else if (is_function(tokens[i])) {
                 temp_stack = push(temp_stack, tokens[i]);
 
             } else if (is_operator(tokens[i])) {
                 while (temp_stack && is_operator(temp_stack->data) &&
-                (priority(tokens[i]) < priority((int) temp_stack->data) ||
-                (priority(tokens[i]) == priority((int) temp_stack->data) && associativity(tokens[i]) == 0))) {
-                    result = push_queue(result, (int) temp_stack->data);
+                       (priority(tokens[i]) < priority((int)temp_stack->data) ||
+                        (priority(tokens[i]) == priority((int)temp_stack->data) &&
+                         associativity(tokens[i]) == 0))) {
+                    result = push_queue(result, (int)temp_stack->data);
                     temp_stack = pop(temp_stack);
                 }
 
-                temp_stack = push(temp_stack, (double) tokens[i]);
+                temp_stack = push(temp_stack, (double)tokens[i]);
             } else if (tokens[i] == -6) {
                 temp_stack = push(temp_stack, tokens[i]);
             } else if (tokens[i] == -7) {
@@ -115,7 +117,7 @@ struct queue *shunting_yard(char *input, int *flag) {
                         brace_flag = 0;
                         break;
                     } else {
-                        result = push_queue(result, (int) temp_stack->data);
+                        result = push_queue(result, (int)temp_stack->data);
                         temp_stack = pop(temp_stack);
                     }
                 }
@@ -128,7 +130,7 @@ struct queue *shunting_yard(char *input, int *flag) {
                 temp_stack = pop(temp_stack);
 
                 if (temp_stack && is_function(temp_stack->data)) {
-                    result = push_queue(result, (int) temp_stack->data);
+                    result = push_queue(result, (int)temp_stack->data);
                     temp_stack = pop(temp_stack);
                 }
             }
@@ -142,7 +144,7 @@ struct queue *shunting_yard(char *input, int *flag) {
                     *flag = 1;
                     break;
                 }
-                result = push_queue(result, (int) temp_stack->data);
+                result = push_queue(result, (int)temp_stack->data);
                 temp_stack = pop(temp_stack);
             }
         }
