@@ -1,3 +1,5 @@
+#include "shunting_yard.h"
+
 char *input_math_expression() {
     char *res = malloc(sizeof(char));
     int i = 0, break_flag = 1;
