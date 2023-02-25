@@ -1,4 +1,6 @@
 #include "stack.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 struct stack *init(double data) {
     struct stack *elements = malloc(sizeof(struct stack));

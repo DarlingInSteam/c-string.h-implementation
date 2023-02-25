@@ -7,9 +7,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *input_math_expression();
+char *readline_();
 struct queue *shunting_yard(char *input, int *flag);
-int priority_action(int token);
+int priority(int token);
 int associativity(int token);
 
 #endif

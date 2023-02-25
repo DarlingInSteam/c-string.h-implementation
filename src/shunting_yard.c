@@ -1,32 +1,47 @@
 #include "shunting_yard.h"
 #include "tokens.h"
 #include "queue.h"
+#include "stack.h"
+#include "matrix.h"
+#include <string.h>
 
-char *input_math_expression() {
-    char *res = malloc(sizeof(char));
-    int i = 0, break_flag = 1;
+char *readline_() {
+    char buf[81] = {0};
+    char *res = NULL, *tmp;
+    int len = 0;
+    int n = 0;
 
-    while (break_flag == 1) {
-        scanf("%c", &(res)[i]);
-        char *temp = realloc(res, sizeof(char));
-
-        if (temp != NULL) res = temp;
-        if (res != NULL) {
-            if (res[i] == '\n') { //ввод до нажатия ентера
-                res[i] = '\0';
-                break_flag = 0;
+    do {
+        n = scanf("%80[^\n]", buf);
+        if (n < 0) {
+            if (!res) {
+                return NULL;
             }
+        } else if (n > 0) {
+            int chunk_len = (int) strlen(buf);
+            int str_len = len + chunk_len;
+            tmp = realloc(res, str_len + 1);
+            if (tmp == NULL) {
+            } else {
+                res = tmp;
+            }
+            memcpy(res + len, buf, chunk_len);
+            len = str_len;
         } else {
-            free(res);
+            scanf("%*c");
         }
+    } while (n > 0);
 
-        if (break_flag == 1) i++;
+    if (len > 0) {
+        res[len] = '\0';
+    } else {
+        res = calloc(1, sizeof(char));
     }
-
     return res;
 }
 
-int priority_action(int token) {
+
+int priority(int token) {
     int ans;
 
     switch (token) {
@@ -71,7 +86,6 @@ struct queue *shunting_yard(char *input, int *flag) {
     struct stack *temp_stack = NULL;
 
     *flag = 0;
-
     if (!tokens) {
         *flag = 1;
     } else {

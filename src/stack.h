@@ -4,7 +4,7 @@
 struct stack {
     double data;
     struct stack *next;
-}
+};
 
 struct stack *push(struct stack *root, double data);
 struct stack *pop(struct stack *root);
