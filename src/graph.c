@@ -5,6 +5,7 @@
 #define WIDTH 80
 
 int main() {
-    input_math_expression();
+    char *input = input_math_expression();
+    
 }
 
