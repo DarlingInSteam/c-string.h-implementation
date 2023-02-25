@@ -23,7 +23,7 @@ int main() {
         printf("n/a\n");
     } else {
         int **matrix = function2matrix(result);
-        print(matrix);
+        output_matrix(matrix, HEIGHT, WIDTH);
         free_memory(matrix, HEIGHT);
     }
 
@@ -31,19 +31,6 @@ int main() {
     free_queue(result);
 
     return 0;
-}
-
-void print(int **matrix) {
-    for (int i = 0; i < HEIGHT; i++) {
-        for (int j = 0; j < WIDTH; j++) {
-            if (matrix[i][j])
-                printf("*");
-            else
-                printf(".");
-        }
-
-        printf("\n");
-    }
 }
 
 int **function2matrix(struct queue *result) {
