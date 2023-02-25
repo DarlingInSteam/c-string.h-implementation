@@ -5,6 +5,6 @@
 #define WIDTH 80
 
 int main() {
-    
+    input_math_expression();
 }
 
