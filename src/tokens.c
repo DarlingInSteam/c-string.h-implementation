@@ -1,4 +1,5 @@
 #include "tokens.h"
+#include "define.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,25 +24,25 @@ int *read_tokens(char *input, int *amount_tokens) {
 
             switch (input[i]) {
                 case '+':
-                    tokens[*amount_tokens] = -1;
+                    tokens[*amount_tokens] = PLUS;
                     break;
                 case '-':
                     if (tokens[*amount_tokens - 1] > -1)
-                        tokens[*amount_tokens] = -3;
+                        tokens[*amount_tokens] = MINUS_U;
                     else
-                        tokens[*amount_tokens] = -2;
+                        tokens[*amount_tokens] = MINUS_B;
                     break;
                 case '*':
-                    tokens[*amount_tokens] = -4;
+                    tokens[*amount_tokens] = MUL;
                     break;
                 case '/':
-                    tokens[*amount_tokens] = -5;
+                    tokens[*amount_tokens] = DIF;
                     break;
                 case '(':
-                    tokens[*amount_tokens] = -6;
+                    tokens[*amount_tokens] = OPEN_SKOB;
                     break;
                 case ')':
-                    tokens[*amount_tokens] = -7;
+                    tokens[*amount_tokens] = CLOSE_SKOB;
                     break;
             }
 
@@ -61,37 +62,37 @@ int *read_tokens(char *input, int *amount_tokens) {
             (*amount_tokens)++;
         } else if ((len - i >= 4) && strncmp(input + i, "sqrt", 4) == 0) {
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
-            tokens[*amount_tokens] = -12;
+            tokens[*amount_tokens] = SQRT;
             (*amount_tokens)++;
             i += 4;
         } else if ((len - i >= 2) && (strncmp(input + i, "ln", 2) == 0)) {
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
-            tokens[*amount_tokens] = -13;
+            tokens[*amount_tokens] = LN;
             (*amount_tokens)++;
             i += 2;
         } else if ((strncmp(input + i, "sin", 3) == 0) && (len - i >= 3)) {
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
-            tokens[*amount_tokens] = -8;
+            tokens[*amount_tokens] = SIN;
             (*amount_tokens)++;
             i += 3;
         } else if ((strncmp(input + i, "cos", 3) == 0) && (len - i >= 3)) {
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
-            tokens[*amount_tokens] = -9;
+            tokens[*amount_tokens] = COS;
             (*amount_tokens)++;
             i += 3;
         } else if ((strncmp(input + i, "tan", 3) == 0) && (len - i >= 3)) {
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
-            tokens[*amount_tokens] = -10;
+            tokens[*amount_tokens] = TAN;
             (*amount_tokens)++;
             i += 3;
         } else if ((strncmp(input + i, "ctg", 3) == 0) && (len - i >= 3)) {
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
-            tokens[*amount_tokens] = -11;
+            tokens[*amount_tokens] = CTG;
             (*amount_tokens)++;
             i += 3;
         } else if (input[i] == 'x') {
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
-            tokens[*amount_tokens] = -14;
+            tokens[*amount_tokens] = X;
             (*amount_tokens)++;
             i++;
         } else if (input[i] == ' ' || input[i] == '\t') {

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "define.h"
 #include "matrix.h"
 #include "queue.h"
 #include "shunting_yard.h"
@@ -51,33 +52,33 @@ int **function2matrix(struct queue *result) {
                     double x2;
                     double x1;
                     double x;
-                    case -1:
+                    case PLUS:
                         x2 = temp->data;
                         temp = pop(temp);
                         x1 = temp->data;
                         temp = pop(temp);
                         temp = push(temp, x1 + x2);
                         break;
-                    case -2:
+                    case MINUS_B:
                         x = temp->data;
                         temp = pop(temp);
                         temp = push(temp, -x);
                         break;
-                    case -3:
+                    case MINUS_U:
                         x2 = temp->data;
                         temp = pop(temp);
                         x1 = temp->data;
                         temp = pop(temp);
                         temp = push(temp, x1 - x2);
                         break;
-                    case -4:
+                    case MUL:
                         x2 = temp->data;
                         temp = pop(temp);
                         x1 = temp->data;
                         temp = pop(temp);
                         temp = push(temp, x1 * x2);
                         break;
-                    case -5:
+                    case DIF:
                         x2 = temp->data;
                         temp = pop(temp);
                         x1 = temp->data;
@@ -87,17 +88,17 @@ int **function2matrix(struct queue *result) {
                         else
                             flag = 1;
                         break;
-                    case -8:
+                    case SIN:
                         x = temp->data;
                         temp = pop(temp);
                         temp = push(temp, sin(x));
                         break;
-                    case -9:
+                    case COS:
                         x = temp->data;
                         temp = pop(temp);
                         temp = push(temp, cos(x));
                         break;
-                    case -10:
+                    case TAN:
                         x = temp->data;
                         temp = pop(temp);
                         if (cos(x))
@@ -105,7 +106,7 @@ int **function2matrix(struct queue *result) {
                         else
                             flag = 1;
                         break;
-                    case -11:
+                    case CTG:
                         x = temp->data;
                         temp = pop(temp);
                         if (sin(x))
@@ -113,7 +114,7 @@ int **function2matrix(struct queue *result) {
                         else
                             flag = 1;
                         break;
-                    case -12:
+                    case SQRT:
                         x = temp->data;
                         temp = pop(temp);
                         if (x)
@@ -121,7 +122,7 @@ int **function2matrix(struct queue *result) {
                         else
                             flag = 1;
                         break;
-                    case -13:
+                    case LN:
                         x = temp->data;
                         temp = pop(temp);
                         if (x)
@@ -129,7 +130,7 @@ int **function2matrix(struct queue *result) {
                         else
                             flag = 1;
                         break;
-                    case -14:
+                    case X:
                         temp = push(temp, i * 4.0 * M_PI / 79.0);
                         break;
                 }
