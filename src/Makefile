@@ -3,7 +3,7 @@ CC=gcc
 CFLAGS=-Wall -Werror -Wextra -std=c11
 
 all : graph.o stack.o queue.o matrix.o shunting_yard.o tokens.o
-	$(CC) graph.o stack.o queue.o matrix.o shunting_yard.o tokens.o -o ./../build/graph -lm
+	$(CC) $(CFLAGS) graph.o stack.o queue.o matrix.o shunting_yard.o tokens.o -o ../build/graph -lm
 	rm -f *.o
 
 graph.o : graph.c
