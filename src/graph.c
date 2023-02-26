@@ -12,7 +12,7 @@
 #define HEIGHT 25
 #define WIDTH 80
 
-int **function2matrix(struct queue *result);
+int **functionTomatrix(struct queue *result);
 
 int main() {
     int flag;
@@ -23,7 +23,7 @@ int main() {
     if (flag) {
         printf("n/a\n");
     } else {
-        int **matrix = function2matrix(result);
+        int **matrix = functionTomatrix(result);
         output_matrix(matrix, HEIGHT, WIDTH);
         free_memory(matrix, HEIGHT);
     }
@@ -34,7 +34,7 @@ int main() {
     return 0;
 }
 
-int **function2matrix(struct queue *result) {
+int **functionTomatrix(struct queue *result) {
     int **matrix = calloc(HEIGHT, sizeof(int *));
 
     for (int i = 0; i < HEIGHT; i++) matrix[i] = calloc(WIDTH, sizeof(int));
@@ -134,9 +134,6 @@ int **function2matrix(struct queue *result) {
                         temp = push(temp, i * 4.0 * M_PI / 79.0);
                         break;
                 }
-
-
-
             }
             if (flag) break;
             current = current->next;

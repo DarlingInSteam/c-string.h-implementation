@@ -1,9 +1,10 @@
 #include "tokens.h"
-#include "define.h"
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "define.h"
 
 int *read_tokens(char *input, int *amount_tokens) {
     int len = (int)strlen(input), flag = 0;
@@ -18,7 +19,6 @@ int *read_tokens(char *input, int *amount_tokens) {
                 tokens = tmp;
             } else {
                 flag = 1;
-                printf("1");
                 break;
             }
 
