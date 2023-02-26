@@ -11,7 +11,6 @@
 #define HEIGHT 25
 #define WIDTH 80
 
-void print(int **matrix);
 int **function2matrix(struct queue *result);
 
 int main() {
@@ -134,6 +133,9 @@ int **function2matrix(struct queue *result) {
                         temp = push(temp, i * 4.0 * M_PI / 79.0);
                         break;
                 }
+
+
+
             }
             if (flag) break;
             current = current->next;

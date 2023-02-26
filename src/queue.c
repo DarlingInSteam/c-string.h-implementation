@@ -33,4 +33,6 @@ void free_queue(struct queue *root) {
         free(current);
         current = next;
     }
+
+    free(current);
 }

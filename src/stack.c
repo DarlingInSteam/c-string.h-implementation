@@ -38,4 +38,6 @@ void free_stack(struct stack *root) {
         free(current);
         current = next;
     }
+
+    free(current);
 }
