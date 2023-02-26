@@ -3,9 +3,9 @@
 
 #include <stdlib.h>
 
-struct queue {
-    int data;
-    struct queue *next;
+struct queue { //структура очереди
+    int data; //значение
+    struct queue *next;// ссылка на след элемент
 };
 
 struct queue *push_queue(struct queue *root, int data);

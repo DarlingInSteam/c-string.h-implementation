@@ -1,6 +1,6 @@
 #include "queue.h"
 
-struct queue *init_queue(int data) {
+struct queue *init_queue(int data) { //инициализация очереди
     struct queue *elements = NULL;
 
     elements = malloc(sizeof(struct queue));
@@ -10,7 +10,7 @@ struct queue *init_queue(int data) {
     return elements;
 }
 
-struct queue *push_queue(struct queue *root, int data) {
+struct queue *push_queue(struct queue *root, int data) { //добавляем в очередь новый элемент
     struct queue *new = init_queue(data);
     struct queue *current = root;
 
@@ -25,7 +25,7 @@ struct queue *push_queue(struct queue *root, int data) {
     return root;
 }
 
-void free_queue(struct queue *root) {
+void free_queue(struct queue *root) { //тут очистка очереди (внес правку, была ошибка)
     struct queue *current = root, *next;
 
     while (current != NULL) {

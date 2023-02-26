@@ -1,7 +1,7 @@
 #ifndef STACK_H
 #define STACK_H
 
-struct stack {
+struct stack { //структура стека
     double data;
     struct stack *next;
 };

@@ -6,14 +6,14 @@
 
 #include "define.h"
 
-int *read_tokens(char *input, int *amount_tokens) {
-    int len = (int)strlen(input), flag = 0;
-    int *tokens = NULL, *tmp = NULL;
+int *read_tokens(char *input, int *amount_tokens) { //разбиваем строку ввода на токены
+    int len = (int)strlen(input), flag = 0; // тут длина строки ввода и флаг
+    int *tokens = NULL, *tmp = NULL; //токен и темп для токена
 
-    *amount_tokens = 0;
+    *amount_tokens = 0; //количество токенов
 
     for (int i = 0; i < len;) {
-        if (len - i >= 1 && is_operator_c(input[i])) {
+        if (len - i >= 1 && is_operator_c(input[i])) { //есть ли в строке ввода хоть какая-то операция
             tmp = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
             if (tmp != NULL) {
                 tokens = tmp;
@@ -22,8 +22,8 @@ int *read_tokens(char *input, int *amount_tokens) {
                 break;
             }
 
-            switch (input[i]) {
-                case '+':
+            switch (input[i]) { //свич работает с каждым элементом строки ввода
+                case '+': // если у нас элемень строки равен плюсу или - и тд то ему присваивается значение (значения можно посмотреть в define.h)
                     tokens[*amount_tokens] = PLUS;
                     break;
                 case '-':
@@ -48,7 +48,7 @@ int *read_tokens(char *input, int *amount_tokens) {
 
             (*amount_tokens)++;
             i += 1;
-        } else if ('0' <= input[i] && input[i] <= '9') {
+        } else if ('0' <= input[i] && input[i] <= '9') { //если не функция а число то переводим его из строки в число и добавляем в виде числа а не строки
             int digit = 0;
 
             while ('0' <= input[i] && input[i] <= '9' && i < len) {
@@ -60,7 +60,7 @@ int *read_tokens(char *input, int *amount_tokens) {
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
             tokens[*amount_tokens] = digit;
             (*amount_tokens)++;
-        } else if ((len - i >= 4) && strncmp(input + i, "sqrt", 4) == 0) {
+        } else if ((len - i >= 4) && strncmp(input + i, "sqrt", 4) == 0) { //сравниваем строки, если строка + н-ое количество элементов равны правильному значению, то приравниваем нужное число из дефайн аш
             tokens = realloc(tokens, (*amount_tokens + 1) * sizeof(int));
             tokens[*amount_tokens] = SQRT;
             (*amount_tokens)++;

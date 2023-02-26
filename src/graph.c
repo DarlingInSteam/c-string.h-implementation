@@ -15,14 +15,14 @@
 int **functionTomatrix(struct queue *result);
 
 int main() {
-    int flag;
-    char *input = readline_();
-    struct queue *result = NULL;
+    int flag;//флаг ошибки, который будет передоваться в функцию парсинга, чтобы при ошибке вывести n/a 
+    char *input = readline_(); //вызывем функция ввода мат выражения
+    struct queue *result = NULL; 
 
-    result = shunting_yard(input, &flag);
-    if (flag) {
+    result = shunting_yard(input, &flag); //парсим это выражение
+    if (flag) { //если ошибка
         printf("n/a\n");
-    } else {
+    } else { //иначе превращаем очередь в матрицу и выводим график
         int **matrix = functionTomatrix(result);
         output_matrix(matrix, HEIGHT, WIDTH);
         free_memory(matrix, HEIGHT);
@@ -34,31 +34,31 @@ int main() {
     return 0;
 }
 
-int **functionTomatrix(struct queue *result) {
-    int **matrix = calloc(HEIGHT, sizeof(int *));
+int **functionTomatrix(struct queue *result) { //превращаем функцию в матрицу
+    int **matrix = calloc(HEIGHT, sizeof(int *)); 
 
     for (int i = 0; i < HEIGHT; i++) matrix[i] = calloc(WIDTH, sizeof(int));
 
-    for (int i = 0; i < WIDTH; i++) {
+    for (int i = 0; i < WIDTH; i++) { //проходим по 
         int flag = 0;
         struct stack *temp = NULL;
         struct queue *current = result;
 
-        while (current) {
+        while (current) { // проходим по очереди и смотрим какудю операцию надо провести
             if (current->data > 0) {
                 temp = push(temp, current->data);
             } else {
-                switch ((int)current->data) {
+                switch ((int)current->data) { //свич у нас проверяет значение операций (-1 -2 -3 -4 и тд)
                     double x2;
                     double x1;
                     double x;
-                    case PLUS:
+                    case PLUS: //кейсы потерпели маленькое изменение, теперь не -1 -2 -3, а названия операций, в самих кейсах идет работа со стеком, где лежат знаения
                         x2 = temp->data;
-                        temp = pop(temp);
-                        x1 = temp->data;
-                        temp = pop(temp);
-                        temp = push(temp, x1 + x2);
-                        break;
+                        temp = pop(temp); //берем из стека верхний элемент
+                        x1 = temp->data; //берем из верхнего элемента значение
+                        temp = pop(temp); // потом берем новый верхний элемент стека
+                        temp = push(temp, x1 + x2); // и складываем их значения
+                        break; //таким образом работаем и дальше во всех кейсах дальше работаем так же, как и в этом кейсе
                     case MINUS_B:
                         x = temp->data;
                         temp = pop(temp);
@@ -131,7 +131,7 @@ int **functionTomatrix(struct queue *result) {
                             flag = 1;
                         break;
                     case X:
-                        temp = push(temp, i * 4.0 * M_PI / 79.0);
+                        temp = push(temp, i * 4.0 * M_PI / 79.0); //если икс, то он должен лежать от 0 до 4пи и в рамках нашего поля от 0 до 79
                         break;
                 }
             }

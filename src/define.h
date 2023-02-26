@@ -1,6 +1,6 @@
 #ifndef DEFINE_H
 #define DEFINE_H
-
+//у каждой операции есть свой номер
 #define PLUS -1
 #define MINUS_U -3
 #define MINUS_B -2

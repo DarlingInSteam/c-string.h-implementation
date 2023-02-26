@@ -80,24 +80,24 @@ int associativity(int token) {
     return ans;
 }
 
-struct queue *shunting_yard(char *input, int *flag) {
-    struct queue *result = NULL;
-    int amount_tokens = 0;
-    int *tokens = read_tokens(input, &amount_tokens);
-    struct stack *temp_stack = NULL;
+struct queue *shunting_yard(char *input, int *flag) { //здесь мы получим токены и забьем их в очередь и стек
+    struct queue *result = NULL; //операции уйдут в очередь
+    int amount_tokens = 0; // количество токенов 
+    int *tokens = read_tokens(input, &amount_tokens); //массив наших токенов
+    struct stack *temp_stack = NULL;// числа уйдут в стек
 
     *flag = 0;
     if (!tokens) {
         *flag = 1;
     } else {
         int i = 0;
-        while (i < amount_tokens) {
-            if (tokens[i] > -1 || tokens[i] == -14) {
+        while (i < amount_tokens) { //цикл идет от нуля до последнего токена
+            if (tokens[i] > -1 || tokens[i] == -14) { // если наш токен не число или токен это икс, то это операция и ее мы кидаем в очередь
                 result = push_queue(result, tokens[i]);
-            } else if (is_function(tokens[i])) {
+            } else if (is_function(tokens[i])) { // если число, то кидаем в стек
                 temp_stack = push(temp_stack, tokens[i]);
 
-            } else if (is_operator(tokens[i])) {
+            } else if (is_operator(tokens[i])) { //раскидываем наш стек по приоритетам
                 while (temp_stack && is_operator(temp_stack->data) &&
                        (priority(tokens[i]) < priority((int)temp_stack->data) ||
                         (priority(tokens[i]) == priority((int)temp_stack->data) &&
@@ -107,9 +107,9 @@ struct queue *shunting_yard(char *input, int *flag) {
                 }
 
                 temp_stack = push(temp_stack, (double)tokens[i]);
-            } else if (tokens[i] == -6) {
+            } else if (tokens[i] == -6) { //если нашли скобку открывающую то дальше ищем закрывающую
                 temp_stack = push(temp_stack, tokens[i]);
-            } else if (tokens[i] == -7) {
+            } else if (tokens[i] == -7) { // если есть закрывающая то должна быть открывающая, ищем по циклу
                 int brace_flag = 1;
 
                 while (temp_stack) {
@@ -122,7 +122,7 @@ struct queue *shunting_yard(char *input, int *flag) {
                     }
                 }
 
-                if (brace_flag) {
+                if (brace_flag) { // если не нашли открывающую но есть закрывающая то кидаем ошибку
                     *flag = 1;
                     break;
                 }

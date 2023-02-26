@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct stack *init(double data) {
+struct stack *init(double data) { //инициализация стека
     struct stack *elements = malloc(sizeof(struct stack));
 
     elements->data = data;
@@ -12,7 +12,7 @@ struct stack *init(double data) {
     return elements;
 }
 
-struct stack *push(struct stack *root, double data) {
+struct stack *push(struct stack *root, double data) { //добавляем элемент стека на верхушку
     struct stack *new = init(data);
 
     if (root) new->next = root;
@@ -20,7 +20,7 @@ struct stack *push(struct stack *root, double data) {
     return new;
 }
 
-struct stack *pop(struct stack *root) {
+struct stack *pop(struct stack *root) { //забираем элемент стека с верхушки и удаляем его
     if (root) {
         struct stack *next = root->next;
         free(root);
@@ -30,7 +30,7 @@ struct stack *pop(struct stack *root) {
     return root;
 }
 
-void free_stack(struct stack *root) {
+void free_stack(struct stack *root) { //очищаем стек
     struct stack *current = root, *next;
 
     while (current != NULL) {
